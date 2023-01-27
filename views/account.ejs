@@ -1,0 +1,21 @@
+<%- include('partials/nav_profile') %> 
+    <title>My Account ||API</title>
+</head>
+<body>
+    <div class="container-profile">
+        <div class="card">
+            <div class="card-image">
+                <img src="user_profile.png" alt="User profile image">
+            </div>
+            <div class="card-body">
+                <strong><%= user.email %> </strong>
+                <p>Member since: <%= user.createdAt %></p>
+            </div>
+            <div class="card-footer">
+                <a href="/account" class="myaccout">My Account</a>
+                <a href="/logout" class="logout">Sign Out</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
