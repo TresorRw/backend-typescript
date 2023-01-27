@@ -1,4 +1,5 @@
 const Users = require('../models/userModel');
+const Addres = require('../models/addressModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 // Creating a token
@@ -46,6 +47,29 @@ module.exports.renderProfile = async (req, res) => {
                 const userEmail = decodedToken.id;
                 const user = await Users.findOne({ where: { email: userEmail } });
                 res.render('../views/profile', { user });
+            }
+        });
+    }
+    else {
+        res.redirect('/');
+    }
+};
+module.exports.renderAccount = async (req, res) => {
+    const token = req.cookies.usrtk;
+    if (token) {
+        jwt.verify(token, 'personal-brand-app', async (err, decodedToken) => {
+            if (err) {
+                res.redirect('/');
+            }
+            else {
+                const userEmail = decodedToken.id;
+                const userAddress = await Addres.findOne({ where: { email: userEmail } });
+                console.log(await userAddress);
+                // if(await userAddress.length != 0) {
+                //     console.log('Address found!')
+                // } else {
+                //     console.log('Address not found');
+                // }
             }
         });
     }

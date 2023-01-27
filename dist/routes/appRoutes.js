@@ -4,4 +4,5 @@ let router = Router();
 router.post('/signup', controller.signup_post);
 router.post('/login', controller.logUser);
 router.get('/profile', controller.renderProfile);
+router.get('/account', controller.renderAccount);
 module.exports = router;
