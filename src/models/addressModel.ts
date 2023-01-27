@@ -1,6 +1,6 @@
 const Sequelize_ = require('sequelize');
 const db_ = require('../config/db');
-const Address = db_.define('user_address', {
+const Addr = db_.define('user_address', {
     email: {
         type: Sequelize_.STRING
     },
@@ -21,4 +21,4 @@ const Address = db_.define('user_address', {
     }
 })
 
-module.exports = Address;
+module.exports = Addr;

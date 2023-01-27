@@ -1,5 +1,5 @@
 const Users = require('../models/userModel');
-const Addres = require('../models/addressModel');
+const user_address = require('../models/addressModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 // Creating a token
@@ -63,13 +63,7 @@ module.exports.renderAccount = async (req, res) => {
             }
             else {
                 const userEmail = decodedToken.id;
-                const userAddress = await Addres.findOne({ where: { email: userEmail } });
-                console.log(await userAddress);
-                // if(await userAddress.length != 0) {
-                //     console.log('Address found!')
-                // } else {
-                //     console.log('Address not found');
-                // }
+                console.log(user_address);
             }
         });
     }
