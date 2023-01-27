@@ -1,0 +1,91 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito+Sans:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+    width: 100%;
+    background: linear-gradient(to right, #05f, #4285F3);
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+.container {
+    max-width: 90%;
+    width: 400px;
+    background: rgba(255,255,255, 1);
+    margin-top: 100px;
+    padding: 2%;
+    border-radius: 10px;
+    text-align: center;
+    h3{
+        font-weight: 700;
+        font-size: 1.4em;
+        line-height: 40px;
+    }
+    .card-button {
+        padding: 0.3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 5px 0 rgba(0,0,0,.4);
+        border-radius: 5px;
+        margin: 10px 0;    
+        cursor: pointer;   
+        background-color: whitesmoke; 
+        img {
+            margin-right: 0.3em;
+        }
+    }
+    .card-form {
+        margin-top: 30px;
+        form {
+            input {
+                width: 100%;
+                outline: none;
+                margin-bottom: 7px;
+                font-size: 16px;
+                padding: 0.3em 0.5em;
+                background: #eee;
+                border: none;
+                border-bottom: 2px solid #eee;
+                border-radius: 3px;
+                &:focus {
+                    border-color: #05f;
+                }
+
+            }
+            button {
+                width: 100%;
+                cursor: pointer;
+                margin: 30px 0;
+                background-color: #05f;
+                border-style: none;
+                padding: 0.3em;
+                border-radius: 3px;
+                color: #fff;
+                font-weight: 600;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .alert {
+        width: 100%;
+        padding: 1%;
+        border-radius: 3px;
+        &.success {
+            background-color: rgba(3, 218, 3, 0.322);
+        }
+        &.error {
+            background-color: rgba(255, 0, 0, 0.473);
+        }
+    }
+}

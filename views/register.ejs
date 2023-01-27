@@ -1,0 +1,70 @@
+<%- include('partials/nav') -%>
+<title>Regsiter ||API</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>SIGN UP</h3>
+            </div>
+            <div class="card-body">
+                <div class="card-button">
+                    <img src="google_icon.png" alt="Google logo"> Create With Google
+                </div>
+                <div class="alert"></div>
+                <div class="card-form">
+                    <form id="createAccount">
+                        <input type="email" name="email" required placeholder="Email Address">
+                        <input type="password" name="sec" required placeholder="Account Password">
+                        <button type="submit">Sign up</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p>Already have an account? <a href="/">Sign in now</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const form = document.querySelector('#createAccount');
+        const alertSpace = document.querySelector('.alert');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            alertSpace.classList.add('success');
+            alertSpace.innerText = "Authenticanting..."
+            const email = form.email.value;
+            const password = form.sec.value;
+            if (password.length < 6) {
+                alertSpace.className = 'alert error';
+                alertSpace.innerText = 'Password should be at least 6 characters.'
+            } else {
+                const sendData = await fetch('/signup', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email,
+                        password
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const response = await sendData.json();
+                console.log(await response);
+                if (await response.status == 201) {
+                    alertSpace.className = 'alert success';
+                    alertSpace.innerText = 'Your account is created!'
+                    setTimeout(() => {
+                        window.location.assign('/profile');
+                    }, 2000);
+                } else {
+                    alertSpace.className = 'alert error';
+                    alertSpace.innerHTML = 'Something went wrong! <br> Email is already in use!';
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
