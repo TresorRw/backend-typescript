@@ -1,6 +1,7 @@
-<%- include('partials/nav_profile') %> 
-    <title>My Account ||API</title>
+<%- include('partials/nav_profile') %>
+<title>My Account ||API</title>
 </head>
+
 <body>
     <div class="container-profile">
         <div class="card">
@@ -8,14 +9,75 @@
                 <img src="user_profile.png" alt="User profile image">
             </div>
             <div class="card-body">
-                <strong><%= user.email %> </strong>
-                <p>Member since: <%= user.createdAt %></p>
+                <% if(prof == 'new') { %>
+                <h4>New Billing Address</h4>
+                <div class="alert"></div>
+                <div class="card-form">
+                    <form id="saveAddress">
+                        <input type="hidden" name="email" required placeholder="Your email" value="<%= email %>">
+                        <input type="text" name="province" required autofocus placeholder="Province">
+                        <input type="text" name="district" required placeholder="District">
+                        <input type="text" name="sector" required placeholder="Sector">
+                        <input type="text" name="cell" required placeholder="Cell">
+                        <input type="text" name="street" required placeholder="Street Number">
+                        <button type="submit">Save Address</button>
+                    </form>
+                </div>
+                <% } else {%>
+                <h3>Your Billing Address</h3>
+                <hr>
+                <div class="address">
+                    <p><strong>Email</strong>: <%= prof.email %> </p>
+                    <p><strong>Province</strong>: <%= prof.province %> </p>
+                    <p><strong>District</strong>: <%= prof.district %> </p>
+                    <p><strong>Sector</strong>: <%= prof.sector %> </p>
+                    <p><strong>Cell</strong>: <%= prof.cell %> </p>
+                    <p><strong>Street</strong>: <%= prof.street %> </p>
+                </div>
+                <%  } %>
             </div>
             <div class="card-footer">
-                <a href="/account" class="myaccout">My Account</a>
-                <a href="/logout" class="logout">Sign Out</a>
+                <a href="/profile" class="myaccout">My Profile</a>
             </div>
         </div>
     </div>
+    <script>
+        const form = document.querySelector('#saveAddress');
+        const alertSpace = document.querySelector('.alert');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            alertSpace.classList.add('success');
+            alertSpace.innerText = "Sending your data..."
+            const email = form.email.value;
+            const province = form.province.value;
+            const district = form.district.value;
+            const sector = form.sector.value;
+            const cell = form.cell.value;
+            const street = form.street.value;
+            const saveAddress = await fetch('/address', {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    province,
+                    district,
+                    sector,
+                    cell,
+                    street
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const response = await saveAddress.json()
+            if (await response.status == 400) {
+                alertSpace.className = 'alert error';
+                alertSpace.innerHTML = response.message;
+            } else {
+                alertSpace.classList.add('success');
+                alertSpace.innerText = "Profile is saved!"
+            }
+        })
+    </script>
 </body>
+
 </html>

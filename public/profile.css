@@ -33,7 +33,56 @@ a {
   height: 100px;
   border-radius: 100%;
   margin: -75px auto 0 auto;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
   background-color: #fff;
+}
+.container-profile .card-form {
+  margin-top: 30px;
+}
+.container-profile .card-form form input, select {
+  width: 100%;
+  outline: none;
+  margin-bottom: 7px;
+  font-size: 16px;
+  padding: 0.3em 0.5em;
+  background: #eee;
+  border: none;
+  border-bottom: 2px solid #eee;
+  border-radius: 3px;
+}
+.container-profile .card-form form input:focus, select:focus {
+  border-color: #05f;
+}
+.address {
+  text-align: left !important;
+  margin: 20px 0 !important;
+}
+hr {
+  margin: 5px 0 0 0;
+  border: 1px solid #05f;
+}
+.container-profile .card-form form button {
+  width: 100%;
+  cursor: pointer;
+  margin: 30px 0;
+  background-color: #05f;
+  border-style: none;
+  padding: 0.3em;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+}
+.container-profile .alert {
+  width: 100%;
+  padding: 1%;
+  border-radius: 3px;
+}
+.container-profile .alert.success {
+  background-color: rgba(3, 218, 3, 0.322);
+}
+.container-profile .alert.error {
+  background-color: rgba(255, 0, 0, 0.473);
 }
 .container-profile .card-image img {
   width: 100%;
@@ -41,14 +90,9 @@ a {
 .container-profile .card-body, .container-profile .card-footer {
   margin-top: 20px;
 }
-.container-profile .card-footer {
-  display: flex;
-  justify-self: space-between;
-  align-items: center;
-}
+
 .container-profile .card-footer a {
   padding: 0.3em 0.5em;
-  margin: 0 1em;
   border-radius: 5px;
 }
 .container-profile .card-footer a.myaccout {

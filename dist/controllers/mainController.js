@@ -65,6 +65,12 @@ module.exports.renderAccount = async (req, res) => {
                 const userEmail = decodedToken.id;
                 const check = await user_address.findOne({ where: { email: userEmail } });
                 console.log(await check);
+                if (await check == null || await check == '') {
+                    res.render('../views/account', { prof: 'new', email: userEmail });
+                }
+                else {
+                    res.render('../views/account', { prof: check, email: userEmail });
+                }
             }
         });
     }
@@ -94,5 +100,25 @@ module.exports.logUser = async (req, res) => {
     }
     else {
         res.status(400).json({ status: 400, message: "Provide all inputs" });
+    }
+};
+module.exports.saveAddress = async (req, res) => {
+    const email = req.body.email;
+    const province = req.body.province;
+    const district = req.body.district;
+    const sector = req.body.sector;
+    const cell = req.body.cell;
+    const street = req.body.street;
+    if (email && province && district && sector && cell && street) {
+        const add = await user_address.create({ email, province, district, sector, cell, street });
+        if (await add) {
+            res.status(201).json({ status: 201, message: "Profile saved.", prof: add });
+        }
+        else {
+            res.status(400).json({ status: 400, message: "Something went wrong!" });
+        }
+    }
+    else {
+        res.status(400).json({ status: 400, message: "Please fill all fields!" });
     }
 };
