@@ -62,7 +62,12 @@ module.exports.renderAccount =async (req, res) => {
                 res.redirect('/');
             } else {
                 const userEmail = decodedToken.id;
-                console.log(user_address)
+                const check = await user_address.findOne({where: {email: userEmail}})
+                if(await check == null || await check == '') {
+                    res.render('../views/account', {prof: 'new'});
+                } else {
+                    res.render('../views/count', {prof: check});
+                }
             }
         })
     } else {

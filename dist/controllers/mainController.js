@@ -63,7 +63,8 @@ module.exports.renderAccount = async (req, res) => {
             }
             else {
                 const userEmail = decodedToken.id;
-                console.log(user_address);
+                const check = await user_address.findOne({ where: { email: userEmail } });
+                console.log(await check);
             }
         });
     }
