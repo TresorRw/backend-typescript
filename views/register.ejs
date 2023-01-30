@@ -16,6 +16,7 @@
                 <div class="card-form">
                     <form id="createAccount">
                         <input type="email" name="email" required placeholder="Email Address">
+                        <input type="text" name="names" required placeholder="Full Names">
                         <input type="password" name="sec" required placeholder="Account Password">
                         <button type="submit">Sign up</button>
                     </form>
@@ -29,11 +30,17 @@
     <script>
         const form = document.querySelector('#createAccount');
         const alertSpace = document.querySelector('.alert');
+        const googleAuth = document.querySelector('.card-button');
+        googleAuth.addEventListener('click', e => {
+            e.preventDefault()
+            window.location.assign('/auth/google');
+        })
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             alertSpace.classList.add('success');
             alertSpace.innerText = "Authenticanting..."
             const email = form.email.value;
+            const names = form.names.value;
             const password = form.sec.value;
             if (password.length < 6) {
                 alertSpace.className = 'alert error';
@@ -43,6 +50,7 @@
                     method: 'POST',
                     body: JSON.stringify({
                         email,
+                        names,
                         password
                     }),
                     headers: {

@@ -6,6 +6,12 @@ const User = dbc.define('user', {
     }, 
     user_pwd: {
         type: Sequelizes.STRING
+    },
+    names: {
+        type: Sequelizes.STRING,
+    },
+    profileLink: {
+        type: Sequelizes.STRING
     }
 })
 

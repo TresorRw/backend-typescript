@@ -6,4 +6,6 @@ router.post('/login', controller.logUser);
 router.get('/profile', controller.renderProfile);
 router.get('/account', controller.renderAccount);
 router.post('/address', controller.saveAddress);
+router.get('/auth/error', controller.signupError);
+router.get('/welcome', controller.saveBeforeRedirect);
 module.exports = router;
