@@ -28,6 +28,11 @@
     <script>
         const form = document.querySelector('#login');
         const alertSpace = document.querySelector('.alert');
+        const googleAuth = document.querySelector('.card-button');
+        googleAuth.addEventListener('click', e => {
+            e.preventDefault()
+            window.location.assign('/auth/google');
+        })
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             alertSpace.classList.add('success');

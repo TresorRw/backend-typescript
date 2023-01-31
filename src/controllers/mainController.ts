@@ -50,8 +50,8 @@ module.exports.saveBeforeRedirect = async (req, res) => {
     const names = req.user.displayName;
     const profileLink = req.user.picture;
 
-    let checkExists = await Users.findAll({ where: { email } });
-    if (checkExists.length == 0) {
+    let checkExists = await Users.findOne({ where: { email } });
+    if (await checkExists == null || await checkExists == '') {
         const token = createToken(email);
         try {
             const newOne = await Users.create({
@@ -66,7 +66,10 @@ module.exports.saveBeforeRedirect = async (req, res) => {
             res.status(400).json({ status: 400, message: "You have eerror", error });
         }
     } else {
-        res.status(400).json({ status: 400, message: "Email already used!" });
+        const token = createToken(email);
+        res.cookie("usrtk", token, { maxAge: duration * 1000 });
+        res.render("../views/profile", { user: checkExists });
+        
     }
 };
 
